@@ -1,4 +1,4 @@
-package io.github.ollama4j.examples;
+package nl.lutske;
 
 import io.github.ollama4j.OllamaAPI;
 import io.github.ollama4j.exceptions.OllamaBaseException;
@@ -14,6 +14,7 @@ public class CreateModel {
 
         OllamaAPI ollamaAPI = new OllamaAPI(host);
 
-        ollamaAPI.createModel(CustomModelRequest.builder().model("mario").from("qwen:0.5b").system("You are Mario from Super Mario Bros.").build());
+        ollamaAPI.createModel(CustomModelRequest.builder()
+                .model("mario").from("qwen:0.5b").system("You are Mario from Super Mario Bros.").build());
     }
 }

@@ -6,7 +6,7 @@ import io.github.ollama4j.models.chat.OllamaChatRequest;
 import io.github.ollama4j.models.chat.OllamaChatRequestBuilder;
 import io.github.ollama4j.models.chat.OllamaChatResult;
 
-public class LlamaChatExample {
+public class CustomChatExample {
 
     public static void main(String[] args) throws Exception {
         String host = "http://localhost:11434/";
@@ -17,11 +17,11 @@ public class LlamaChatExample {
 
         // use your custom model name instead of a built-in type
         OllamaChatRequestBuilder builder = OllamaChatRequestBuilder
-                .getInstance("llama-animal-expert");
+                .getInstance("j-on-the-beach-example");
 
         // create first user question about llamas
         OllamaChatRequest requestModel = builder
-                .withMessage(OllamaChatMessageRole.USER, "How do we call a baby llama?")
+                .withMessage(OllamaChatMessageRole.USER, "What are the best known brands for blue minature trains?")
                 .build();
 
         System.out.println("First question: " + requestModel.getMessages().getFirst().getContent());
@@ -34,7 +34,7 @@ public class LlamaChatExample {
         // ask a follow-up question in the same conversation
         requestModel = builder
                 .withMessages(chatResult.getChatHistory())
-                .withMessage(OllamaChatMessageRole.USER, "Are llamas social animals?")
+                .withMessage(OllamaChatMessageRole.USER, "What is the best brand in your opinion?")
                 .build();
 
         System.out.println("Second question: " + requestModel.getMessages().getFirst().getContent());

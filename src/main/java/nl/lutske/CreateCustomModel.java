@@ -7,7 +7,7 @@ import io.github.ollama4j.models.request.CustomModelRequest;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class CreateLlamaAnimalModel {
+public class CreateCustomModel {
     public static void main(String[] args) throws IOException, OllamaBaseException, URISyntaxException, InterruptedException {
 
         String host = "http://localhost:11434/";
@@ -16,13 +16,11 @@ public class CreateLlamaAnimalModel {
 
         ollamaAPI.createModel(
                 CustomModelRequest.builder()
-                        .model("llama-animal-expert")
+                        .model("j-on-the-beach-example")
                         .from("qwen2.5:7b")
-                        .system("You are a zoologist who specializes in llamas. " +
-                                "You know everything about their behavior, habitat, care, and history. " +
-                                "Answer all questions as a friendly and knowledgeable llama expert.")
+                        .system("You are a minature train expert who specializes in blue miniature trains. " +
+                                "You know everything about them and history. " +
+                                "Answer all questions as a aggresive and knowledgeable minature train expert.")
                         .build());
     }
 }
-
-

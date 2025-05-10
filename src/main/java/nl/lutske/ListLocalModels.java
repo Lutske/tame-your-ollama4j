@@ -1,4 +1,4 @@
-package io.github.ollama4j.examples;
+package nl.lutske;
 
 import io.github.ollama4j.OllamaAPI;
 import io.github.ollama4j.exceptions.OllamaBaseException;
