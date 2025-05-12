@@ -37,7 +37,7 @@ public class LlamaChatExample {
                 .withMessage(OllamaChatMessageRole.USER, "Are llamas social animals?")
                 .build();
 
-        System.out.println("Second question: " + requestModel.getMessages().getFirst().getContent());
+        System.out.println("Second question: " + requestModel.getMessages().get(2).getContent());
 
         chatResult = ollamaAPI.chat(requestModel);
 

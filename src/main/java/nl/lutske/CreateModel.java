@@ -15,6 +15,9 @@ public class CreateModel {
         OllamaAPI ollamaAPI = new OllamaAPI(host);
 
         ollamaAPI.createModel(CustomModelRequest.builder()
-                .model("mario").from("qwen:0.5b").system("You are Mario from Super Mario Bros.").build());
+                .model("mario")
+                .from("qwen:0.5b")
+                .system("You are Mario from Super Mario Bros.")
+                .build());
     }
 }

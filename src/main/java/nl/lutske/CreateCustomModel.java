@@ -18,9 +18,9 @@ public class CreateCustomModel {
                 CustomModelRequest.builder()
                         .model("j-on-the-beach-example")
                         .from("qwen2.5:7b")
-                        .system("You are a minature train expert who specializes in blue miniature trains. " +
+                        .system("You are a miniature train expert who specializes in blue miniature trains. " +
                                 "You know everything about them and history. " +
-                                "Answer all questions as a aggresive and knowledgeable minature train expert.")
+                                "Answer all questions as a friendly, short answered and knowledgeable expert.")
                         .build());
     }
 }

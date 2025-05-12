@@ -21,7 +21,7 @@ public class CustomChatExample {
 
         // create first user question about llamas
         OllamaChatRequest requestModel = builder
-                .withMessage(OllamaChatMessageRole.USER, "What are the best known brands for blue minature trains?")
+                .withMessage(OllamaChatMessageRole.USER, "What are the best known brands for blue miniature trains?")
                 .build();
 
         System.out.println("First question: " + requestModel.getMessages().getFirst().getContent());
@@ -37,7 +37,7 @@ public class CustomChatExample {
                 .withMessage(OllamaChatMessageRole.USER, "What is the best brand in your opinion?")
                 .build();
 
-        System.out.println("Second question: " + requestModel.getMessages().getFirst().getContent());
+        System.out.println("Second question: " + requestModel.getMessages().get(2).getContent());
 
         chatResult = ollamaAPI.chat(requestModel);
 
