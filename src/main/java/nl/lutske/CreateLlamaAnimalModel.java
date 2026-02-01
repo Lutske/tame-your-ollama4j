@@ -1,18 +1,15 @@
 package nl.lutske;
 
-import io.github.ollama4j.OllamaAPI;
-import io.github.ollama4j.exceptions.OllamaBaseException;
+import io.github.ollama4j.Ollama;
+import io.github.ollama4j.exceptions.OllamaException;
 import io.github.ollama4j.models.request.CustomModelRequest;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 public class CreateLlamaAnimalModel {
-    public static void main(String[] args) throws IOException, OllamaBaseException, URISyntaxException, InterruptedException {
 
+    static void main() throws OllamaException {
         String host = "http://localhost:11434/";
 
-        OllamaAPI ollamaAPI = new OllamaAPI(host);
+        Ollama ollamaAPI = new Ollama(host);
 
         ollamaAPI.createModel(
                 CustomModelRequest.builder()
@@ -22,6 +19,8 @@ public class CreateLlamaAnimalModel {
                                 "You know everything about their behavior, habitat, care, and history. " +
                                 "Answer all questions as a friendly and knowledgeable llama expert.")
                         .build());
+
+        IO.println("Done creating model llama-animal-expert");
     }
 }
 

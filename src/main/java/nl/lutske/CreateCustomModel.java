@@ -1,26 +1,26 @@
 package nl.lutske;
 
-import io.github.ollama4j.OllamaAPI;
-import io.github.ollama4j.exceptions.OllamaBaseException;
+import io.github.ollama4j.Ollama;
+import io.github.ollama4j.exceptions.OllamaException;
 import io.github.ollama4j.models.request.CustomModelRequest;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 public class CreateCustomModel {
-    public static void main(String[] args) throws IOException, OllamaBaseException, URISyntaxException, InterruptedException {
 
+    static void main() throws OllamaException {
         String host = "http://localhost:11434/";
+        Ollama ollama = new Ollama(host);
 
-        OllamaAPI ollamaAPI = new OllamaAPI(host);
+        String modelName = "demo-example";
 
-        ollamaAPI.createModel(
+        ollama.createModel(
                 CustomModelRequest.builder()
-                        .model("j-on-the-beach-example")
+                        .model(modelName)
                         .from("qwen2.5:7b")
-                        .system("You are a miniature train expert who specializes in blue miniature trains. " +
-                                "You know everything about them and history. " +
-                                "Answer all questions as a friendly, short answered and knowledgeable expert.")
+                        .system("You are a Star Wars expert. " +
+                                "You know everything about Star Wars and it's history and specialize in the empire. " +
+                                "Answer all questions in chewbacca style.")
                         .build());
+
+        IO.println("Done creating " + modelName);
     }
 }

@@ -1,23 +1,21 @@
 package nl.lutske;
 
-import io.github.ollama4j.OllamaAPI;
-import io.github.ollama4j.exceptions.OllamaBaseException;
+import io.github.ollama4j.Ollama;
+import io.github.ollama4j.exceptions.OllamaException;
 import io.github.ollama4j.models.response.Model;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
 public class ListLocalModels {
 
-    public static void main(String[] args) throws OllamaBaseException, IOException, URISyntaxException, InterruptedException {
+    static void main() throws OllamaException {
 
         String host = "http://localhost:11434/";
 
-        OllamaAPI ollamaAPI = new OllamaAPI(host);
+        Ollama ollama = new Ollama(host);
 
-        List<Model> models = ollamaAPI.listModels();
+        List<Model> models = ollama.listModels();
 
-        models.forEach(model -> System.out.println(model.getName()));
+        models.forEach(model -> IO.println(model.getName()));
     }
 }

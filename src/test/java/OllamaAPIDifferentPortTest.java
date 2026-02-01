@@ -1,17 +1,15 @@
-
-import io.github.ollama4j.OllamaAPI;
+import io.github.ollama4j.Ollama;
+import io.github.ollama4j.exceptions.OllamaException;
 
 public class OllamaAPIDifferentPortTest {
 
-    public static void main(String[] args) {
+    static void main() throws OllamaException {
         String host = "http://localhost:11434/";
 
-        OllamaAPI ollamaAPI = new OllamaAPI(host);
+        Ollama ollama = new Ollama(host);
 
-        ollamaAPI.setVerbose(true);
+        boolean isOllamaServerReachable = ollama.ping();
 
-        boolean isOllamaServerReachable = ollamaAPI.ping();
-
-        System.out.println("Is Ollama server running: " + isOllamaServerReachable);
+        IO.println("Is Ollama server running: " + isOllamaServerReachable);
     }
 }

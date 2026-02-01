@@ -1,24 +1,22 @@
 package io.github.ollama4j.examples;
 
-import io.github.ollama4j.OllamaAPI;
-import io.github.ollama4j.exceptions.OllamaBaseException;
-import io.github.ollama4j.models.response.LibraryModel;
-import io.github.ollama4j.models.response.LibraryModelDetail;
+import io.github.ollama4j.Ollama;
+import io.github.ollama4j.exceptions.OllamaException;
+import io.github.ollama4j.models.response.Model;
+import io.github.ollama4j.models.response.ModelDetail;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
 public class GetLibraryModelTags {
-    public static void main(String[] args) throws OllamaBaseException, IOException, URISyntaxException, InterruptedException {
+    static void main() throws OllamaException {
         String host = "http://localhost:11434/";
 
-        OllamaAPI ollamaAPI = new OllamaAPI(host);
+        Ollama ollama = new Ollama(host);
 
-        List<LibraryModel> libraryModels = ollamaAPI.listModelsFromLibrary();
+        List<Model> libraryModels = ollama.listModels();
 
-        LibraryModelDetail libraryModelDetail = ollamaAPI.getLibraryModelDetails(libraryModels.get(0));
+        ModelDetail libraryModelDetail = ollama.getModelDetails(libraryModels.getFirst().getModelName());
 
-        System.out.println(libraryModelDetail);
+        IO.println(libraryModelDetail);
     }
 }

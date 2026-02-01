@@ -1,46 +1,56 @@
 package nl.lutske;
 
-import io.github.ollama4j.OllamaAPI;
+import io.github.ollama4j.Ollama;
+import io.github.ollama4j.exceptions.OllamaException;
 import io.github.ollama4j.models.chat.OllamaChatMessageRole;
 import io.github.ollama4j.models.chat.OllamaChatRequest;
-import io.github.ollama4j.models.chat.OllamaChatRequestBuilder;
-import io.github.ollama4j.models.chat.OllamaChatResult;
+import io.github.ollama4j.models.chat.OllamaChatStreamObserver;
 
 public class LlamaChatExample {
 
-    public static void main(String[] args) throws Exception {
+    static void main() throws OllamaException {
         String host = "http://localhost:11434/";
 
         // connect to the local Ollama instance
-        OllamaAPI ollamaAPI = new OllamaAPI(host);
-        ollamaAPI.setVerbose(false);
+        Ollama ollama = new Ollama(host);
 
         // use your custom model name instead of a built-in type
-        OllamaChatRequestBuilder builder = OllamaChatRequestBuilder
-                .getInstance("llama-animal-expert");
+        String model = "llama-animal-expert";
 
-        // create first user question about llamas
-        OllamaChatRequest requestModel = builder
-                .withMessage(OllamaChatMessageRole.USER, "How do we call a baby llama?")
+        OllamaChatRequest builder = OllamaChatRequest.builder().withModel(model);
+
+        // Define a stream observer.
+        OllamaChatStreamObserver streamObserver = new OllamaChatStreamObserver();
+
+        // If thinking tokens are found, print them in lowercase :)
+        streamObserver.setThinkingStreamHandler(
+                message -> IO.print(message.toUpperCase()));
+
+        // Response tokens to be printed in lowercase
+        streamObserver.setResponseStreamHandler(
+                message -> IO.print(message.toLowerCase()));
+
+        askAndPrint(ollama, model, "How do we call a baby llama?", streamObserver);
+        askAndPrint(ollama, model, "Are llamas social animals?", streamObserver);
+    }
+
+    private static void askAndPrint(Ollama ollama,
+                                    String model,
+                                    String question,
+                                    OllamaChatStreamObserver observer)
+            throws OllamaException {
+
+        // Print the question BEFORE the model starts answering
+        IO.println("\nQuestion: " + question);
+
+        OllamaChatRequest request = OllamaChatRequest.builder()
+                .withModel(model)
+                .withMessage(OllamaChatMessageRole.USER, question)
                 .build();
 
-        System.out.println("First question: " + requestModel.getMessages().getFirst().getContent());
+        // Trigger streaming answer
+        ollama.chat(request, observer);
 
-        // ask the model
-        OllamaChatResult chatResult = ollamaAPI.chat(requestModel);
-
-        System.out.println("First answer: " + chatResult.getResponseModel().getMessage().getContent());
-
-        // ask a follow-up question in the same conversation
-        requestModel = builder
-                .withMessages(chatResult.getChatHistory())
-                .withMessage(OllamaChatMessageRole.USER, "Are llamas social animals?")
-                .build();
-
-        System.out.println("Second question: " + requestModel.getMessages().get(2).getContent());
-
-        chatResult = ollamaAPI.chat(requestModel);
-
-        System.out.println("Second answer: " + chatResult.getResponseModel().getMessage().getContent());
+        IO.println("\n");
     }
 }

@@ -1,12 +1,13 @@
-import io.github.ollama4j.OllamaAPI;
+import io.github.ollama4j.Ollama;
+import io.github.ollama4j.exceptions.OllamaException;
 
 public class OllamaAPITest {
 
-    public static void main(String[] args) {
-        OllamaAPI ollamaAPI = new OllamaAPI();
+    public static void main() throws OllamaException {
+        Ollama ollama = new Ollama();
 
-        boolean isOllamaServerReachable = ollamaAPI.ping();
+        boolean isOllamaServerReachable = ollama.ping();
 
-        System.out.println("Is Ollama server running: " + isOllamaServerReachable);
+        IO.println("Is Ollama server running: " + isOllamaServerReachable);
     }
 }

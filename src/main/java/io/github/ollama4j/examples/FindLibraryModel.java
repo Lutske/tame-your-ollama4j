@@ -1,21 +1,25 @@
 package io.github.ollama4j.examples;
 
-import io.github.ollama4j.OllamaAPI;
-import io.github.ollama4j.exceptions.OllamaBaseException;
-import io.github.ollama4j.models.response.LibraryModelTag;
-
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 public class FindLibraryModel {
-    public static void main(String[] args) throws OllamaBaseException, IOException, URISyntaxException, InterruptedException {
+    static void main() throws IOException, InterruptedException {
 
         String host = "http://localhost:11434/";
 
-        OllamaAPI ollamaAPI = new OllamaAPI(host);
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(host))
+                .GET()
+                .build();
 
-        LibraryModelTag libraryModelTag = ollamaAPI.findModelTagFromLibrary("qwen2.5", "7b");
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        String json = response.body();
 
-        System.out.println(libraryModelTag);
+        IO.println(json);
     }
 }
