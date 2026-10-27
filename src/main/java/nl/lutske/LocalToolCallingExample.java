@@ -21,7 +21,7 @@ public class LocalToolCallingExample {
     record CategorizedExpense(Expense expense, String category, double confidence) {
     }
 
-    public static void main(String[] args) throws Exception {
+    static void main() throws Exception {
 
         // 1) Connect to Ollama (ollama4j)
         Ollama ollama = new Ollama("http://localhost:11434/");

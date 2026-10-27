@@ -17,8 +17,6 @@ public class LlamaChatExample {
         // use your custom model name instead of a built-in type
         String model = "llama-animal-expert";
 
-        OllamaChatRequest builder = OllamaChatRequest.builder().withModel(model);
-
         // Define a stream observer.
         OllamaChatStreamObserver streamObserver = new OllamaChatStreamObserver();
 

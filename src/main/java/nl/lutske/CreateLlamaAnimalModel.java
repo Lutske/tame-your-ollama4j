@@ -9,9 +9,9 @@ public class CreateLlamaAnimalModel {
     static void main() throws OllamaException {
         String host = "http://localhost:11434/";
 
-        Ollama ollamaAPI = new Ollama(host);
+        Ollama ollama = new Ollama(host);
 
-        ollamaAPI.createModel(
+        ollama.createModel(
                 CustomModelRequest.builder()
                         .model("llama-animal-expert")
                         .from("qwen2.5:7b")

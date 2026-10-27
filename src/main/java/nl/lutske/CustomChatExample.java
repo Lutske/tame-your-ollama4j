@@ -15,9 +15,7 @@ public class CustomChatExample {
         Ollama ollama = new Ollama(host);
 
         // use your custom model name instead of a built-in type
-        String model = "demo-example";
-
-        OllamaChatRequest builder = OllamaChatRequest.builder().withModel(model);
+        String model = "nijmegenJUG-example-2";
 
         // Define a stream observer.
         OllamaChatStreamObserver streamObserver = new OllamaChatStreamObserver();
@@ -30,8 +28,8 @@ public class CustomChatExample {
         streamObserver.setResponseStreamHandler(
                 message -> IO.print(message.toLowerCase()));
 
-        askAndPrint(ollama, model, "Who is Lukes father?", streamObserver);
-        askAndPrint(ollama, model, "If the JUG Noord would be a Star Wars character, What would it be?", streamObserver);
+        askAndPrint(ollama, model, "Kun je mango's in je woonkamer telen?", streamObserver);
+        askAndPrint(ollama, model, "Wat is de grootste mango op aarde?", streamObserver);
     }
 
     private static void askAndPrint(Ollama ollama,

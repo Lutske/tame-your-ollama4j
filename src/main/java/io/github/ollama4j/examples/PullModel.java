@@ -7,7 +7,7 @@ public class PullModel {
 
     static void main() throws OllamaException {
         String host = "http://localhost:11434/";
-        String model = "lfm2.5-thinking";
+        String model = " qwen2.5vl:7b";
 
         Ollama ollamaAPI = new Ollama(host);
 
