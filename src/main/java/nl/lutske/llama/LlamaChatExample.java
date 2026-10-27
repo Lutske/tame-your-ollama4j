@@ -1,4 +1,4 @@
-package nl.lutske;
+package nl.lutske.llama;
 
 import io.github.ollama4j.Ollama;
 import io.github.ollama4j.exceptions.OllamaException;
@@ -6,16 +6,16 @@ import io.github.ollama4j.models.chat.OllamaChatMessageRole;
 import io.github.ollama4j.models.chat.OllamaChatRequest;
 import io.github.ollama4j.models.chat.OllamaChatStreamObserver;
 
-public class CustomChatExample {
+public class LlamaChatExample {
 
-    static void main() throws Exception {
+    static void main() throws OllamaException {
         String host = "http://localhost:11434/";
 
         // connect to the local Ollama instance
         Ollama ollama = new Ollama(host);
 
         // use your custom model name instead of a built-in type
-        String model = "nijmegenJUG-example-2";
+        String model = "llama-animal-expert";
 
         // Define a stream observer.
         OllamaChatStreamObserver streamObserver = new OllamaChatStreamObserver();
@@ -28,8 +28,8 @@ public class CustomChatExample {
         streamObserver.setResponseStreamHandler(
                 message -> IO.print(message.toLowerCase()));
 
-        askAndPrint(ollama, model, "Kun je mango's in je woonkamer telen?", streamObserver);
-        askAndPrint(ollama, model, "Wat is de grootste mango op aarde?", streamObserver);
+        askAndPrint(ollama, model, "How do we call a baby llama?", streamObserver);
+        askAndPrint(ollama, model, "Are llamas social animals?", streamObserver);
     }
 
     private static void askAndPrint(Ollama ollama,

@@ -1,4 +1,4 @@
-package nl.lutske;
+package nl.lutske.custom;
 
 import io.github.ollama4j.Ollama;
 import io.github.ollama4j.exceptions.OllamaException;
